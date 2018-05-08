@@ -1,0 +1,14 @@
+#main{
+    background-image: url('../assets/aurora.jpg');
+    background-size:     cover;                
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    margin: auto;
+    height: 100%;
+}
+
+#secondary {
+    height: auto;
+    max-width: 1000px;
+    margin: 0 auto;
+}
