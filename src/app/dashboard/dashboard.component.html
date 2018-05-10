@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
-  <div class="col-4" id="sidebar">
+  <div class="col-4" *ngIf="profile" id="sidebar">
     <div id="profile">
       <div id="head">
-        <img src="https://scontent.fsdu2-1.fna.fbcdn.net/v/t1.0-9/21314546_864835456998115_4479417808890581147_n.jpg?_nc_cat=0&_nc_eui2=v1%3AAeGgj1itcYn_WNIlYM1QvSiWCJgBkKSbE_i1nXdsArkaXwq4Djyhm8ebqLDSgVq2LfrxgTDMBW761jSdh1ch4jeAcC341YuTMOFNyB56dfijwA&oh=09825f7d537bd8514fd7219542d6c545&oe=5B9C5FCF" class="big-avatar"/>
-        <h3>{{pacient}}</h3>
+        <img src="{{profile.image}}" class="big-avatar"/>
+        <h3>{{profile.name}}</h3>
       </div>
       <p id="profile-text">
         Estilo Musical: <span id="answer">{{profile.musicStyle}}</span> <br>
@@ -22,7 +22,7 @@
       <p></p>
     </div>
     <div id="depression">
-        <h4>67.50% de chance de depressão</h4>
+        <h4>{{profile.probability}} de chance de depressão</h4>
         <h5>O paciente está em depressão?</h5>
         <button type="button" class="btn btn-light">Sim</button>
         <button type="button" class="btn btn-light">Não</button></div>
@@ -33,54 +33,35 @@
             <img src="../../assets/FACE.png" alt="avatar" class="avatar"/>
             <div class="chat-about">
               <div class="chat-with">Chat with Aurora</div>
-              <div class="chat-num-messages">already 1 902 messages</div>
+              <div class="chat-num-messages">already {{numberoOfMessages}} messages</div>
             </div>
           </div> <!-- end chat-header -->
           
           <div class="chat-history">
-            <ul>
-              <li class="clearfix">
+            
+      <ul>
+          <li *ngFor="let c of chat" class="clearfix">
+            <div *ngIf="c.sender != name" id="received">
                 <div class="message-data align-right">
-                  <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
-                  <span class="message-data-name" >{{pacient}}</span> <i class="fa fa-circle me"></i>
+                  <span class="message-data-time" >{{c.time}}, {{c.date}}</span> &nbsp; &nbsp;
+                  <span class="message-data-name" >{{c.sender}}</span> <i class="fa fa-circle me"></i>
                   
                 </div>
                 <div class="message other-message float-right">
-                  Hi Aurora, how are you? How is the project coming along?
+                  {{c.message}}
                 </div>
-              </li>
-              
-              <li>
+            </div>
+            <div *ngIf="c.sender == name" id="sent">
                 <div class="message-data">
-                  <span class="message-data-name"><i class="fa fa-circle online"></i> Aurora</span>
-                  <span class="message-data-time">10:12 AM, Today</span>
+                  <span class="message-data-name"><i class="fa fa-circle online"></i> {{c.sender}}</span>
+                  <span class="message-data-time">{{c.time}}, {{c.date}}</span>
                 </div>
                 <div class="message my-message">
-                  Are we meeting today? Project has been already finished and I have results to show you.
+                  {{c.message}}
                 </div>
-              </li>
-              
-              <li class="clearfix">
-                <div class="message-data align-right">
-                  <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-                  <span class="message-data-name" >{{pacient}}</span> <i class="fa fa-circle me"></i>
-                  
-                </div>
-                <div class="message other-message float-right">
-                  Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-                </div>
-              </li>
-              
-              <li>
-                <div class="message-data">
-                  <span class="message-data-name"><i class="fa fa-circle online"></i> Aurora</span>
-                  <span class="message-data-time">10:20 AM, Today</span>
-                </div>
-                <div class="message my-message">
-                  Actually everything was fine. I'm very excited to show this to our team.
-                </div>
-              </li>
-            </ul>
+            </div>
+          </li>
+        </ul>
           </div> <!-- end chat-history -->
         </div> <!-- end chat -->
   </div>
