@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  //endpoint http://au-ro-ra.xyz/answer/Hi
   itemRef: AngularFireObject<any>;
   item: Observable<any>;
   userId: string;
@@ -69,7 +68,7 @@ export class ChatComponent implements OnInit {
 
   getObject(message) {
     return new Promise((resolve, reject) => {
-        const API_URL = 'http://au-ro-ra.xyz/answer';
+        const API_URL = 'https://backend.au-ro-ra.xyz/answer';
         let uri = encodeURI(
             `${API_URL}/${message}`
         );
