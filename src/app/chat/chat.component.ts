@@ -13,6 +13,7 @@ export class ChatComponent implements OnInit {
   itemRef: AngularFireObject<any>;
   item: Observable<any>;
   userId: string;
+  userMessage: string;
   name: string;
   chat: object[];
   numberoOfMessages: number;
