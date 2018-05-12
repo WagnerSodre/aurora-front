@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +10,19 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth, private router: Router) {
   }
-  login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  loginWithGoogle() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then(() => {
+      this.router.navigate(['/chat']);
+    });
+  }
+  loginWithFacebook() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .then(() => {
+      this.router.navigate(['/chat']);
+    });
   }
   logout() {
     this.afAuth.auth.signOut();
